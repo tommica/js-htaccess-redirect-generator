@@ -1,0 +1,1 @@
+# js-htaccess-redirect-generator
