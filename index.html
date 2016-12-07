@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Generate htaccess redirects">
+    <meta name="author" content="Tommi Carleman">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="well well-sm">
+        <h1>Bootstrap starter template</h1>
+      </div>
+
+      <div class="options">
+        <div class="form-inline">
+          <div class="radio">
+            <label>
+              <input type="radio" name="redirect_type" value="301" checked> 301
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <textarea class="form-control" rows="30" id="oldUrls"></textarea>
+        </div>
+
+        <div class="col-xs-6">
+          <textarea class="form-control" rows="30" id="newUrls"></textarea>
+        </div>
+
+        <div class="col-xs-12">
+          <button class="btn btn-primary" id="trigger">Create</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <textarea class="form-control" rows="30" readonly id="result"></textarea>
+        </div>
+      </div>
+
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script>
+      jQuery(function($) {
+        var $trigger = $('#trigger');
+
+        $('#trigger').on('click', function() {
+          generateResult();
+        });
+      });
+
+      var generateResult = function() {
+          var oldUrls = $('#oldUrls').val().split('\n');
+          var newUrls = $('#newUrls').val().split('\n');
+          var resultContent = '';
+
+          for(var i = 0; i < oldUrls.length; i++) {
+            var oldUrl = oldUrls[i];
+            var newUrl = newUrls[i];
+            resultContent = resultContent + "\nRedirect 301 " + oldUrl + " " + newUrl;
+          }
+
+          $('#result').val(resultContent);
+      }
+    </script>
+  </body>
+</html>
